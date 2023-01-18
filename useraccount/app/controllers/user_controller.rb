@@ -43,10 +43,4 @@ skip_before_action :verify_authenticity_token
             end
         end
 
-        def authorize
-            if session[:current_user_id]==nil 
-                render html: "User not authenticated from user controller"
-            end
-        end
-        
     end

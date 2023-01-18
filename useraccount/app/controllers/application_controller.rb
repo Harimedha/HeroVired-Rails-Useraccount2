@@ -1,14 +1,11 @@
 class ApplicationController < ActionController::Base
-    before_action :authorize, options:
+    before_action :check_authentication, options:
 
     def index
         render html: "Book stock management page with postgres and rails"
     end
 
-    def authorize
-        # if !session[:current_user_id]
-        #   render html: "User authorize check from application controller"          
-        # #   redirect_to '/'
-        # end
+    def check_authentication
+        
       end
 end

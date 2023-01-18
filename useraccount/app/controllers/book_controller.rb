@@ -5,7 +5,7 @@ skip_before_action :verify_authenticity_token
     def index      
         allBooks = Book.all
         if allBooks
-            render json: {message:"Fetching all books", allBooks:}
+            render json: {message: "User " + session[:current_user_id].to_s + " authenticated", allBooks:}
         else
             render json: allBooks.errors        
         end
@@ -35,8 +35,8 @@ skip_before_action :verify_authenticity_token
        
         bookVal = Book.find(params[:id].to_i)       
         if(bookVal.update!(book_params))        
-            
-            render json: "Book Details Updated Successfully"
+            updatedBook = Book.last
+            render json: {message:"Book Details Updated Successfully", updatedBook:}
         else
             render json: "Book details cannot be updated"
         end
@@ -59,7 +59,7 @@ def book_params
   end
 
 
-def authorize
+def check_authentication
     if session[:current_user_id]==nil 
         render html: "User not authenticated"
     end
